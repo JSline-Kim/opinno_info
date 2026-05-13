@@ -937,18 +937,30 @@ function saveTable(){
 
 // ── UTILS ──
 // ── 열 너비 드래그 조절 ──
+function getColWidths(){
+  try{ return JSON.parse(localStorage.getItem('op_colw_'+drawerKey))||{}; }
+  catch(e){ return {}; }
+}
+function saveColWidths(){
+  const ths = document.querySelectorAll('#d-tbl thead th');
+  const widths = {};
+  ths.forEach((th,i) => { if(th.style.width) widths[i] = th.style.width; });
+  localStorage.setItem('op_colw_'+drawerKey, JSON.stringify(widths));
+}
+
 function initColResize(){
   const table = document.getElementById('d-tbl');
   if(!table) return;
   const ths = table.querySelectorAll('thead th');
+  const savedWidths = getColWidths();
   ths.forEach((th, i) => {
     // 기존 resizer 제거
     const existing = th.querySelector('.col-resizer');
     if(existing) existing.remove();
     // 마지막 열(삭제버튼)은 제외
     if(i === ths.length - 1) return;
-    // 기본 너비 설정
-    if(!th.style.width) th.style.width = '120px';
+    // 저장된 너비 적용, 없으면 기본값
+    th.style.width = savedWidths[i] || '120px';
     const resizer = document.createElement('div');
     resizer.className = 'col-resizer';
     th.appendChild(resizer);
@@ -967,6 +979,8 @@ function initColResize(){
         resizer.classList.remove('dragging');
         document.removeEventListener('mousemove', onMove);
         document.removeEventListener('mouseup', onUp);
+        // 드래그 끝나면 너비 저장
+        saveColWidths();
       };
       document.addEventListener('mousemove', onMove);
       document.addEventListener('mouseup', onUp);
