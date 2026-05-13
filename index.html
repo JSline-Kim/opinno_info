@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<!-- saved from url=(0051)file:///C:/Users/david/Downloads/opinno_info_3.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OPINNO INFO</title>
-<link href="./index_files/tabler-icons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
 :root{--bg:#F7F6F2;--surface:#fff;--border:rgba(0,0,0,0.08);--border-s:rgba(0,0,0,0.15);--text:#1A1A1A;--text2:#6B6860;--text3:#A09E99;--accent:#E05A2B;--r-sm:6px;--r-md:10px;--r-lg:14px;}
@@ -240,7 +241,7 @@ body.edit-mode .row-del{display:inline-flex;}
   <div class="modal">
     <h2>편집 권한 확인</h2>
     <p>편집 권한이 있는 멤버만 수정할 수 있습니다.</p>
-    <input type="password" id="pw-input" placeholder="비밀번호" onkeydown="if(event.key===&#39;Enter&#39;)checkPw()">
+    <input type="password" id="pw-input" placeholder="비밀번호" onkeydown="if(event.key==='Enter')checkPw()">
     <div class="modal-err" id="pw-err">비밀번호가 올바르지 않습니다.</div>
     <div class="modal-btns">
       <button class="btn" onclick="closePwModal()">취소</button>
@@ -259,7 +260,7 @@ body.edit-mode .row-del{display:inline-flex;}
     <input type="password" id="cpw-con" placeholder="새 비밀번호 확인">
     <div class="modal-err" id="cpw-err"></div>
     <div class="modal-btns">
-      <button class="btn" onclick="document.getElementById(&#39;cpw-modal&#39;).classList.remove(&#39;active&#39;)">취소</button>
+      <button class="btn" onclick="document.getElementById('cpw-modal').classList.remove('active')">취소</button>
       <button class="btn btn-p" onclick="changePw()">변경</button>
     </div>
   </div>
@@ -289,8 +290,8 @@ body.edit-mode .row-del{display:inline-flex;}
     <div class="drawer-hbtns">
       <!-- 모드 전환: 텍스트 / 테이블 -->
       <div class="mode-toggle" id="mode-toggle">
-        <button class="mode-btn active" id="mode-text-btn" onclick="switchMode(&#39;text&#39;)"><i class="ti ti-align-left" style="font-size:12px"></i> 텍스트</button>
-        <button class="mode-btn" id="mode-table-btn" onclick="switchMode(&#39;table&#39;)"><i class="ti ti-table" style="font-size:12px"></i> 테이블</button>
+        <button class="mode-btn active" id="mode-text-btn" onclick="switchMode('text')"><i class="ti ti-align-left" style="font-size:12px"></i> 텍스트</button>
+        <button class="mode-btn" id="mode-table-btn" onclick="switchMode('table')"><i class="ti ti-table" style="font-size:12px"></i> 테이블</button>
       </div>
       <button class="drawer-close" onclick="closeDrawer()"><i class="ti ti-x"></i></button>
     </div>
@@ -299,58 +300,58 @@ body.edit-mode .row-del{display:inline-flex;}
   <!-- 텍스트 툴바 -->
   <div class="editor-toolbar" id="d-toolbar">
     <div class="tb-group">
-      <select class="tb-sel" onchange="execCmd(&#39;fontName&#39;,this.value)" title="폰트">
+      <select class="tb-sel" onchange="execCmd('fontName',this.value)" title="폰트">
         <option value="Pretendard">Pretendard</option>
         <option value="Arial">Arial</option>
         <option value="Georgia">Georgia</option>
-        <option value="&#39;Courier New&#39;">Courier</option>
-        <option value="&#39;Times New Roman&#39;">Times</option>
+        <option value="'Courier New'">Courier</option>
+        <option value="'Times New Roman'">Times</option>
       </select>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
-      <select class="tb-sel" onchange="execCmd(&#39;fontSize&#39;,this.value)" title="크기">
+      <select class="tb-sel" onchange="execCmd('fontSize',this.value)" title="크기">
         <option value="1">10px</option><option value="2">13px</option>
-        <option value="3" selected="">16px</option><option value="4">18px</option>
+        <option value="3" selected>16px</option><option value="4">18px</option>
         <option value="5">24px</option><option value="6">32px</option>
       </select>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
-      <button class="tb-btn" onclick="execCmd(&#39;bold&#39;)" title="굵게"><b>B</b></button>
-      <button class="tb-btn" onclick="execCmd(&#39;italic&#39;)" title="기울임"><i>I</i></button>
-      <button class="tb-btn" onclick="execCmd(&#39;underline&#39;)" title="밑줄" style="text-decoration:underline">U</button>
-      <button class="tb-btn" onclick="execCmd(&#39;strikeThrough&#39;)" title="취소선" style="text-decoration:line-through">S</button>
+      <button class="tb-btn" onclick="execCmd('bold')" title="굵게"><b>B</b></button>
+      <button class="tb-btn" onclick="execCmd('italic')" title="기울임"><i>I</i></button>
+      <button class="tb-btn" onclick="execCmd('underline')" title="밑줄" style="text-decoration:underline">U</button>
+      <button class="tb-btn" onclick="execCmd('strikeThrough')" title="취소선" style="text-decoration:line-through">S</button>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
       <div class="tb-col-wrap" title="글자색">
-        <input type="color" value="#1A1A1A" oninput="execCmd(&#39;foreColor&#39;,this.value)">
+        <input type="color" value="#1A1A1A" oninput="execCmd('foreColor',this.value)">
         <div class="tb-col-icon"><i class="ti ti-letter-a"></i></div>
       </div>
       <div class="tb-col-wrap" title="배경색">
-        <input type="color" value="#FFFF00" oninput="execCmd(&#39;hiliteColor&#39;,this.value)">
+        <input type="color" value="#FFFF00" oninput="execCmd('hiliteColor',this.value)">
         <div class="tb-col-icon"><i class="ti ti-highlight"></i></div>
       </div>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
-      <button class="tb-btn" onclick="execCmd(&#39;justifyLeft&#39;)" title="왼쪽"><i class="ti ti-align-left"></i></button>
-      <button class="tb-btn" onclick="execCmd(&#39;justifyCenter&#39;)" title="가운데"><i class="ti ti-align-center"></i></button>
-      <button class="tb-btn" onclick="execCmd(&#39;justifyRight&#39;)" title="오른쪽"><i class="ti ti-align-right"></i></button>
+      <button class="tb-btn" onclick="execCmd('justifyLeft')" title="왼쪽"><i class="ti ti-align-left"></i></button>
+      <button class="tb-btn" onclick="execCmd('justifyCenter')" title="가운데"><i class="ti ti-align-center"></i></button>
+      <button class="tb-btn" onclick="execCmd('justifyRight')" title="오른쪽"><i class="ti ti-align-right"></i></button>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
-      <button class="tb-btn" onclick="execCmd(&#39;insertUnorderedList&#39;)" title="목록"><i class="ti ti-list"></i></button>
-      <button class="tb-btn" onclick="execCmd(&#39;insertOrderedList&#39;)" title="번호목록"><i class="ti ti-list-numbers"></i></button>
+      <button class="tb-btn" onclick="execCmd('insertUnorderedList')" title="목록"><i class="ti ti-list"></i></button>
+      <button class="tb-btn" onclick="execCmd('insertOrderedList')" title="번호목록"><i class="ti ti-list-numbers"></i></button>
     </div>
     <div class="tb-div"></div>
     <div class="tb-group">
-      <button class="tb-btn" onclick="insertSp(&#39;★&#39;)">★</button>
-      <button class="tb-btn" onclick="insertSp(&#39;✓&#39;)">✓</button>
-      <button class="tb-btn" onclick="insertSp(&#39;→&#39;)">→</button>
-      <button class="tb-btn" onclick="insertSp(&#39;💡&#39;)">💡</button>
-      <button class="tb-btn" onclick="insertSp(&#39;📌&#39;)">📌</button>
+      <button class="tb-btn" onclick="insertSp('★')">★</button>
+      <button class="tb-btn" onclick="insertSp('✓')">✓</button>
+      <button class="tb-btn" onclick="insertSp('→')">→</button>
+      <button class="tb-btn" onclick="insertSp('💡')">💡</button>
+      <button class="tb-btn" onclick="insertSp('📌')">📌</button>
       <button class="tb-btn" onclick="toggleSpPanel()" style="font-size:11px">•••</button>
     </div>
   </div>
@@ -415,523 +416,15 @@ body.edit-mode .row-del{display:inline-flex;}
     <span class="e-t sl" id="lv1-t">Lv 1 · 오피노 주요 문서</span>
     <input class="e-i dk sl" id="lv1-i" type="text" value="Lv 1 · 오피노 주요 문서" style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;width:220px;">
   </div>
-  <div class="doc-grid" id="doc-grid"><div class="doc-card" data-id="d1">
-      <div class="doc-view">
-        <i class="ti ti-file-text doc-icon"></i>
-        <div>
-          <div class="doc-title">3사 통합 소개서</div>
-          <div class="doc-sub">OPINNO 공식문서</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="3사 통합 소개서" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="OPINNO 공식문서" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d1&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d2">
-      <div class="doc-view">
-        <i class="ti ti-file-text doc-icon"></i>
-        <div>
-          <div class="doc-title">회사 소개서</div>
-          <div class="doc-sub">OPINNO</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="회사 소개서" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="OPINNO" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d2&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d3">
-      <div class="doc-view">
-        <i class="ti ti-chart-bar doc-icon"></i>
-        <div>
-          <div class="doc-title">데이터 컨설팅 소개서</div>
-          <div class="doc-sub">서비스 소개 v1</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="데이터 컨설팅 소개서" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="서비스 소개 v1" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d3&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d4">
-      <div class="doc-view">
-        <i class="ti ti-star doc-icon"></i>
-        <div>
-          <div class="doc-title">레퍼런스</div>
-          <div class="doc-sub">Performance Reference</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="레퍼런스" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="Performance Reference" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d4&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d5">
-      <div class="doc-view">
-        <i class="ti ti-sparkles doc-icon"></i>
-        <div>
-          <div class="doc-title">뷰티브랜드 레퍼런스</div>
-          <div class="doc-sub">업종별 레퍼런스</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="뷰티브랜드 레퍼런스" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="업종별 레퍼런스" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d5&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d6">
-      <div class="doc-view">
-        <i class="ti ti-hanger doc-icon"></i>
-        <div>
-          <div class="doc-title">패션브랜드 레퍼런스</div>
-          <div class="doc-sub">업종별 레퍼런스</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="패션브랜드 레퍼런스" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="업종별 레퍼런스" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d6&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d7">
-      <div class="doc-view">
-        <i class="ti ti-pill doc-icon"></i>
-        <div>
-          <div class="doc-title">건기식브랜드 레퍼런스</div>
-          <div class="doc-sub">업종별 레퍼런스</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="건기식브랜드 레퍼런스" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="업종별 레퍼런스" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d7&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d8">
-      <div class="doc-view">
-        <i class="ti ti-palette doc-icon"></i>
-        <div>
-          <div class="doc-title">디자인팀 소개서</div>
-          <div class="doc-sub">OPINNO Design</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="디자인팀 소개서" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="OPINNO Design" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d8&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d9">
-      <div class="doc-view">
-        <i class="ti ti-database doc-icon"></i>
-        <div>
-          <div class="doc-title">Bigin 솔루션 소개서</div>
-          <div class="doc-sub">빅인사이트</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="Bigin 솔루션 소개서" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="빅인사이트" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d9&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d10">
-      <div class="doc-view">
-        <i class="ti ti-table doc-icon"></i>
-        <div>
-          <div class="doc-title">샘플 리포트</div>
-          <div class="doc-sub">Google Sheets</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="샘플 리포트" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="Google Sheets" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d10&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d11">
-      <div class="doc-view">
-        <i class="ti ti-report doc-icon"></i>
-        <div>
-          <div class="doc-title">월간 리포트 샘플</div>
-          <div class="doc-sub">오피노 월간리포트</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="월간 리포트 샘플" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="오피노 월간리포트" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d11&#39;)"><i class="ti ti-x"></i></button></div><div class="doc-card" data-id="d12">
-      <div class="doc-view">
-        <i class="ti ti-device-analytics doc-icon"></i>
-        <div>
-          <div class="doc-title">대시보드 (기본형)</div>
-          <div class="doc-sub">Looker Studio</div>
-          
-        </div>
-      </div>
-      <div class="doc-ea">
-        <div><label>제목</label><input type="text" value="대시보드 (기본형)" placeholder="문서 제목"></div>
-        <div><label>설명</label><input type="text" value="Looker Studio" placeholder="설명"></div>
-        <div><label>링크 URL</label><input type="text" value="" placeholder="https://drive.google.com/..."></div>
-      </div>
-      <button class="doc-del" onclick="event.stopPropagation();delDoc(&#39;d12&#39;)"><i class="ti ti-x"></i></button></div><button class="add-doc-btn"><i class="ti ti-plus"></i> 문서 추가</button></div>
+  <div class="doc-grid" id="doc-grid"></div>
 
   <hr class="divider">
 
   <div class="sl-wrap">
     <span class="e-t sl" id="lv2-t">Lv 2 · OPINNO's A-Z</span>
-    <input class="e-i dk sl" id="lv2-i" type="text" value="Lv 2 · OPINNO&#39;s A-Z" style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;width:220px;">
+    <input class="e-i dk sl" id="lv2-i" type="text" value="Lv 2 · OPINNO's A-Z" style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;width:220px;">
   </div>
-  <div class="az-grid" id="az-grid"><div class="az-card" data-id="az1">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(238, 242, 255)"><i class="ti ti-rocket" style="color:rgb(79, 70, 229);font-size:18px"></i></div>
-        <span class="az-title">OPINNO</span>
-        <input class="az-title-i" type="text" value="OPINNO">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;미션&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">미션</span>
-        <input class="az-item-i" type="text" value="미션" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;미션&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;OKR&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">OKR</span>
-        <input class="az-item-i" type="text" value="OKR" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;OKR&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;오피노 팀원&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">오피노 팀원</span>
-        <input class="az-item-i" type="text" value="오피노 팀원" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;오피노 팀원&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;오피노 조직도&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">오피노 조직도</span>
-        <input class="az-item-i" type="text" value="오피노 조직도" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;오피노 조직도&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;오피노 BM&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">오피노 BM</span>
-        <input class="az-item-i" type="text" value="오피노 BM" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;오피노 BM&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;패스트파이브&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">패스트파이브</span>
-        <input class="az-item-i" type="text" value="패스트파이브" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;패스트파이브&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az1&#39;,&#39;브랜드 에셋&#39;,&#39;OPINNO&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">브랜드 에셋</span>
-        <input class="az-item-i" type="text" value="브랜드 에셋" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;브랜드 에셋&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more"></span>
-      <input class="az-more-i" type="text" value="" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az1&#39;,&#39;OPINNO&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><div class="az-card" data-id="az2">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(255, 247, 237)"><i class="ti ti-heart" style="color:rgb(234, 88, 12);font-size:18px"></i></div>
-        <span class="az-title">CULTURE</span>
-        <input class="az-title-i" type="text" value="CULTURE">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;일하는 문화&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">일하는 문화</span>
-        <input class="az-item-i" type="text" value="일하는 문화" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;일하는 문화&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;타운홀&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">타운홀</span>
-        <input class="az-item-i" type="text" value="타운홀" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;타운홀&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;칭찬카드&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">칭찬카드</span>
-        <input class="az-item-i" type="text" value="칭찬카드" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;칭찬카드&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;복장과 호칭&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">복장과 호칭</span>
-        <input class="az-item-i" type="text" value="복장과 호칭" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;복장과 호칭&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;뮤직&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">뮤직</span>
-        <input class="az-item-i" type="text" value="뮤직" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;뮤직&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;사내 강의&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">사내 강의</span>
-        <input class="az-item-i" type="text" value="사내 강의" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;사내 강의&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;외부초청강의&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">외부초청강의</span>
-        <input class="az-item-i" type="text" value="외부초청강의" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;외부초청강의&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;사내 커뮤니케이션&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">사내 커뮤니케이션</span>
-        <input class="az-item-i" type="text" value="사내 커뮤니케이션" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;사내 커뮤니케이션&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az2&#39;,&#39;추천 채용&#39;,&#39;CULTURE&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">추천 채용</span>
-        <input class="az-item-i" type="text" value="추천 채용" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;추천 채용&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more"></span>
-      <input class="az-more-i" type="text" value="" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az2&#39;,&#39;CULTURE&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><div class="az-card" data-id="az3">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(240, 253, 244)"><i class="ti ti-shield-check" style="color:rgb(22, 163, 74);font-size:18px"></i></div>
-        <span class="az-title">RULES</span>
-        <input class="az-title-i" type="text" value="RULES">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;NEW RULE! (2023.12.18~)&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">NEW RULE! (2023.12.18~)</span>
-        <input class="az-item-i" type="text" value="NEW RULE! (2023.12.18~)" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;NEW RULE! (2023.12.18~)&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;연봉, 인센티브, 스톡옵션&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">연봉, 인센티브, 스톡옵션</span>
-        <input class="az-item-i" type="text" value="연봉, 인센티브, 스톡옵션" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;연봉, 인센티브, 스톡옵션&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;출퇴근, 휴가계&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">출퇴근, 휴가계</span>
-        <input class="az-item-i" type="text" value="출퇴근, 휴가계" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;출퇴근, 휴가계&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;노마드&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">노마드</span>
-        <input class="az-item-i" type="text" value="노마드" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;노마드&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;상호평가&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">상호평가</span>
-        <input class="az-item-i" type="text" value="상호평가" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;상호평가&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;법인카드 및 품의서&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">법인카드 및 품의서</span>
-        <input class="az-item-i" type="text" value="법인카드 및 품의서" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;법인카드 및 품의서&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;안식주&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">안식주</span>
-        <input class="az-item-i" type="text" value="안식주" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;안식주&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;문화비, 노마드비, 감사비&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">문화비, 노마드비, 감사비</span>
-        <input class="az-item-i" type="text" value="문화비, 노마드비, 감사비" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;문화비, 노마드비, 감사비&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;야근&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">야근</span>
-        <input class="az-item-i" type="text" value="야근" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;야근&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;업무 이동택시&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">업무 이동택시</span>
-        <input class="az-item-i" type="text" value="업무 이동택시" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;업무 이동택시&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;패널티&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">패널티</span>
-        <input class="az-item-i" type="text" value="패널티" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;패널티&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az3&#39;,&#39;수습평가&#39;,&#39;RULES&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">수습평가</span>
-        <input class="az-item-i" type="text" value="수습평가" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;수습평가&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more"></span>
-      <input class="az-more-i" type="text" value="" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az3&#39;,&#39;RULES&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><div class="az-card" data-id="az4">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(239, 246, 255)"><i class="ti ti-tool" style="color:rgb(37, 99, 235);font-size:18px"></i></div>
-        <span class="az-title">TOOL</span>
-        <input class="az-title-i" type="text" value="TOOL">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az4&#39;,&#39;구글 드라이브&#39;,&#39;TOOL&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">구글 드라이브</span>
-        <input class="az-item-i" type="text" value="구글 드라이브" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;구글 드라이브&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az4&#39;,&#39;슬랙&#39;,&#39;TOOL&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">슬랙</span>
-        <input class="az-item-i" type="text" value="슬랙" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;슬랙&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az4&#39;,&#39;클릭업&#39;,&#39;TOOL&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">클릭업</span>
-        <input class="az-item-i" type="text" value="클릭업" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;클릭업&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az4&#39;,&#39;원티드스페이스&#39;,&#39;TOOL&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">원티드스페이스</span>
-        <input class="az-item-i" type="text" value="원티드스페이스" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;원티드스페이스&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more"></span>
-      <input class="az-more-i" type="text" value="" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az4&#39;,&#39;TOOL&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><div class="az-card" data-id="az5">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(255, 241, 242)"><i class="ti ti-sitemap" style="color:rgb(225, 29, 72);font-size:18px"></i></div>
-        <span class="az-title">PROCESS</span>
-        <input class="az-title-i" type="text" value="PROCESS">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;임사자 온보딩 프로세스&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">임사자 온보딩 프로세스</span>
-        <input class="az-item-i" type="text" value="임사자 온보딩 프로세스" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;임사자 온보딩 프로세스&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;프로젝트 착수 프로세스&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">프로젝트 착수 프로세스</span>
-        <input class="az-item-i" type="text" value="프로젝트 착수 프로세스" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;프로젝트 착수 프로세스&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;캘린더 공유&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">캘린더 공유</span>
-        <input class="az-item-i" type="text" value="캘린더 공유" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;캘린더 공유&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;대대행 신청&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">대대행 신청</span>
-        <input class="az-item-i" type="text" value="대대행 신청" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;대대행 신청&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;환불 프로세스&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">환불 프로세스</span>
-        <input class="az-item-i" type="text" value="환불 프로세스" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;환불 프로세스&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;대대행 문의&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">대대행 문의</span>
-        <input class="az-item-i" type="text" value="대대행 문의" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;대대행 문의&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li>
-      <li class="az-item" onclick="handleItemClick(event,&#39;az5&#39;,&#39;디자인 프로세스&#39;,&#39;PROCESS&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">디자인 프로세스</span>
-        <input class="az-item-i" type="text" value="디자인 프로세스" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;디자인 프로세스&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more"></span>
-      <input class="az-more-i" type="text" value="" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az5&#39;,&#39;PROCESS&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><div class="az-card" data-id="az6">
-      <div class="az-hd">
-        <div class="az-icon" style="background:rgb(254, 252, 232)"><i class="ti ti-book" style="color:rgb(202, 138, 4);font-size:18px"></i></div>
-        <span class="az-title">STUDY</span>
-        <input class="az-title-i" type="text" value="STUDY">
-      </div>
-      <ul class="az-items">
-      <li class="az-item" onclick="handleItemClick(event,&#39;az6&#39;,&#39;업데이트 중&#39;,&#39;STUDY&#39;)">
-        <i class="ti ti-chevron-right az-dot"></i>
-        <span class="az-item-t">업데이트 중</span>
-        <input class="az-item-i" type="text" value="업데이트 중" onclick="event.stopPropagation()">
-        <i class="ti ti-chevron-right az-arrow"></i>
-        <button class="az-item-del" onclick="event.stopPropagation();confirmDeleteItem(this,&#39;업데이트 중&#39;)" title="항목 삭제"><i class="ti ti-x"></i></button>
-      </li></ul>
-      <button class="add-item-btn" onclick="addItem(this)"><i class="ti ti-plus" style="font-size:11px"></i> 항목 추가</button>
-      <span class="az-more">곧 내용이 추가될 예정입니다</span>
-      <input class="az-more-i" type="text" value="곧 내용이 추가될 예정입니다" placeholder="하단 메모 (선택)">
-      <button class="btn btn-d btn-ic az-card-del" onclick="confirmDeleteCard(&#39;az6&#39;,&#39;STUDY&#39;)" title="섹션 삭제"><i class="ti ti-trash"></i></button></div><button class="add-az-btn"><i class="ti ti-plus"></i> 섹션 추가</button></div>
+  <div class="az-grid" id="az-grid"></div>
 
   <div class="footer">OPINNO Marketing · 내부용 · 업데이트 문의는 슬랙으로</div>
 </div>
@@ -1451,6 +944,5 @@ document.addEventListener('keydown',ev=>{
   }
 });
 </script>
-
-
-</body></html>
+</body>
+</html>
