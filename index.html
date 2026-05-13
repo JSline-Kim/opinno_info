@@ -285,6 +285,23 @@ body.edit-mode .row-del{display:inline-flex;}
   </div>
 </div>
 
+<!-- IMAGE URL MODAL -->
+<div class="modal-ov" id="imgurl-modal">
+  <div class="modal">
+    <h2>이미지 URL 삽입</h2>
+    <p>이미지 주소(URL)를 입력하세요.<br>구글 드라이브, imgur 등 외부 이미지 링크 사용 가능합니다.</p>
+    <input type="text" id="imgurl-input" placeholder="https://example.com/image.jpg" oninput="previewImgUrl()" onkeydown="if(event.key==='Enter')confirmInsertImageUrl()">
+    <div style="margin-bottom:8px;">
+      <img id="imgurl-preview" src="" alt="" style="display:none;max-width:100%;max-height:120px;border-radius:6px;border:0.5px solid var(--border);">
+      <div id="imgurl-preview-err" style="display:none;font-size:12px;color:#B91C1C;">이미지를 불러올 수 없습니다.</div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn" onclick="document.getElementById('imgurl-modal').classList.remove('active')">취소</button>
+      <button class="btn btn-p" onclick="confirmInsertImageUrl()"><i class="ti ti-photo"></i> 삽입</button>
+    </div>
+  </div>
+</div>
+
 <!-- DRAWER -->
 <div class="drawer-ov" id="drawer-ov" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
@@ -359,6 +376,14 @@ body.edit-mode .row-del{display:inline-flex;}
       <button class="tb-btn" onclick="insertSp('💡')">💡</button>
       <button class="tb-btn" onclick="insertSp('📌')">📌</button>
       <button class="tb-btn" onclick="toggleSpPanel()" style="font-size:11px">•••</button>
+    </div>
+    <div class="tb-div"></div>
+    <div class="tb-group">
+      <label style="position:relative;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;font-size:12px;font-family:inherit;border-radius:4px;border:0.5px solid var(--border-s);background:var(--surface);color:var(--text2);cursor:pointer;transition:all 0.1s;height:28px;" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--surface)'">
+        <i class="ti ti-upload" style="font-size:13px;"></i> 이미지 업로드
+        <input type="file" accept="image/*" style="position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;top:0;left:0;" onchange="insertImage(this)">
+      </label>
+      <button class="tb-btn" onclick="insertImageUrl()" title="이미지 URL 삽입" style="width:auto;padding:4px 8px;font-size:12px;"><i class="ti ti-link"></i> 이미지 URL</button>
     </div>
   </div>
   <div class="sp-panel" id="sp-panel"></div>
@@ -788,6 +813,111 @@ function drawerSave(){
 // ── TEXT EDITOR ──
 function execCmd(cmd,val){document.getElementById('d-editor').focus();document.execCommand(cmd,false,val||null);}
 function insertSp(c){document.getElementById('d-editor').focus();document.execCommand('insertText',false,c);}
+function insertImage(input){
+  const file = input.files[0];
+  if(!file) return;
+  // 5MB 제한
+  if(file.size > 5 * 1024 * 1024){
+    showToast('이미지는 5MB 이하만 가능합니다');
+    input.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.style.cssText = 'max-width:100%;height:auto;border-radius:6px;margin:8px 0;display:block;cursor:pointer;';
+    img.title = '클릭하여 크기 조절';
+    // 이미지 클릭 시 크기 조절
+    img.onclick = function(){
+      const sizes = ['25%','50%','75%','100%'];
+      const cur = this.style.width || '100%';
+      const idx = sizes.indexOf(cur);
+      this.style.width = sizes[(idx+1) % sizes.length];
+    };
+    // 커서 위치에 삽입
+    const editor = document.getElementById('d-editor');
+    editor.focus();
+    const sel = window.getSelection();
+    if(sel && sel.rangeCount){
+      const range = sel.getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(img);
+      range.setStartAfter(img);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else {
+      editor.appendChild(img);
+    }
+    input.value = '';
+    showToast('이미지가 삽입되었습니다');
+  };
+  reader.readAsDataURL(file);
+}
+
+function insertImageUrl(){
+  // 현재 커서 위치 저장
+  const editor = document.getElementById('d-editor');
+  editor.focus();
+  document.getElementById('imgurl-input').value = '';
+  document.getElementById('imgurl-preview').style.display = 'none';
+  document.getElementById('imgurl-preview-err').style.display = 'none';
+  document.getElementById('imgurl-modal').classList.add('active');
+  setTimeout(() => document.getElementById('imgurl-input').focus(), 100);
+}
+
+function previewImgUrl(){
+  const url = document.getElementById('imgurl-input').value.trim();
+  const preview = document.getElementById('imgurl-preview');
+  const err = document.getElementById('imgurl-preview-err');
+  if(!url){ preview.style.display='none'; err.style.display='none'; return; }
+  preview.src = url;
+  preview.style.display = 'block';
+  preview.onerror = function(){ 
+    preview.style.display='none'; 
+    err.style.display='block'; 
+  };
+  preview.onload = function(){ 
+    err.style.display='none'; 
+  };
+}
+
+function confirmInsertImageUrl(){
+  const url = document.getElementById('imgurl-input').value.trim();
+  if(!url){ showToast('URL을 입력해주세요'); return; }
+  document.getElementById('imgurl-modal').classList.remove('active');
+  insertImageByUrl(url);
+}
+
+function insertImageByUrl(url){
+  const img = document.createElement('img');
+  img.src = url;
+  img.style.cssText = 'max-width:100%;height:auto;border-radius:6px;margin:8px 0;display:block;cursor:pointer;';
+  img.title = '클릭하여 크기 조절';
+  img.onclick = function(){
+    const sizes = ['25%','50%','75%','100%'];
+    const cur = this.style.width || '100%';
+    const idx = sizes.indexOf(cur);
+    this.style.width = sizes[(idx+1) % sizes.length];
+  };
+  const editor = document.getElementById('d-editor');
+  editor.focus();
+  const sel = window.getSelection();
+  if(sel && sel.rangeCount){
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    range.insertNode(img);
+    range.setStartAfter(img);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else {
+    editor.appendChild(img);
+  }
+  showToast('이미지가 삽입되었습니다');
+}
+
 function toggleSpPanel(){const p=document.getElementById('sp-panel');p.style.display=p.style.display==='flex'?'none':'flex';}
 
 // ── TABLE EDITOR ──
@@ -1000,6 +1130,7 @@ document.addEventListener('keydown',ev=>{
     document.getElementById('pw-modal').classList.remove('active');
     document.getElementById('cpw-modal').classList.remove('active');
     document.getElementById('confirm-modal').classList.remove('active');
+    document.getElementById('imgurl-modal').classList.remove('active');
     closeDrawer();
   }
 });
